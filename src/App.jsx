@@ -7,7 +7,7 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (score <= 3) {
-      alert('Please tell us your observation 👎');
+      alert('Please tell us your observation');
     } else if (score > 7) {
       alert('Thanks for your feedback we are always at your service 👌');
     } else {
