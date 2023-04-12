@@ -1,9 +1,10 @@
 * {
   margin: 0;
   padding: 0;
-  box-shadow: none;
   text-decoration: none;
+  box-shadow: none;
   font-family: 'inter', sans-serif;
+  overflow: hidden;
 }
 
 html {
