@@ -2,14 +2,18 @@ import { useState } from 'react';
 import Sents from './Sents';
 
 function Form() {
-  const [score, setScore] = useState('0');
-  const [comment, setComment] = useState('');
+  const [score, setScore] = useState({
+    range: '0',
+    comment: '',
+  });
   const [messageSent, setMessageSent] = useState(false);
 
+  function handeChange(e) {
+    setScore({ ...score, [e.target.name]: e.target.value });
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
-    setComment('');
-    setScore('0');
+    setScore({ range: '0', comment: '' });
     setMessageSent(true);
   };
   return (
@@ -43,14 +47,14 @@ function Form() {
         >
           <h2>Customer Feedback</h2>
           <h3>Please rate us</h3>
-          <h5>Score: {score}🌟</h5>
+          <h5>Score: {score.range}🌟</h5>
           <input
             type="range"
-            name="score"
+            name="range"
             min={0}
             max={10}
-            value={score}
-            onChange={(e) => setScore(e.target.value)}
+            value={score.range}
+            onChange={handeChange}
           />
           <textarea
             style={{
@@ -61,15 +65,14 @@ function Form() {
               borderRadius: '0.3rem',
             }}
             name="comment"
-            id="comment"
             rows="5"
             autoFocus
-            value={comment}
+            value={score.comment}
             placeholder="Please enter your feedback comment"
-            onChange={(e) => setComment(e.target.value)}
+            onChange={handeChange}
           />
           <button
-            disabled={!comment}
+            disabled={!score.comment}
             style={{
               padding: '0.5rem',
               border: '2px solid black',
@@ -83,13 +86,8 @@ function Form() {
           >
             Send Message
           </button>
-          <div
-            style={{
-              marginTop: '1rem',
-            }}
-          ></div>
         </form>
-        {messageSent && <Sents massage={messageSent} back={setMessageSent} />}
+        {messageSent && <Sents back={setMessageSent} />}
       </div>
     </div>
   );

@@ -1,10 +1,12 @@
 import React from 'react';
-import Form from './CustomerFeedBack/Form';
+// import Form from './CustomerFeedBack/Form';
+import AllGoals from './component/AllGoals';
 
 export default function App() {
   return (
     <div>
-      <Form />
+      <AllGoals />
+      {/* <Form /> */}
     </div>
   );
 }
