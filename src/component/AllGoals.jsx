@@ -19,6 +19,13 @@ export default function AllGoals() {
   const addGoals = (goal) => {
     UpdateGoals([...goals, goal]);
   };
+
+  const deleteByIndex = (index) => {
+    UpdateGoals((oldValues) => {
+      return oldValues.filter((_, i) => i !== index);
+    });
+  };
+
   const [data, setData] = useState('lemon');
 
   function handle() {
@@ -37,7 +44,7 @@ export default function AllGoals() {
         <h3>Welcome to {data ? 'Camon' : 'Tecno'} Developer company</h3>
       </div>
       <Goals addGoals={addGoals} />
-      <MapGoals goals={goals} />
+      <MapGoals delete={deleteByIndex} goals={goals} />
       <Reduce />
       <TestState />
     </div>

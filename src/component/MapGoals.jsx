@@ -18,6 +18,7 @@ export default function MapGoals(props) {
             <span>
               My prayer is to: {item.prayer}, before {item.achieve}
             </span>
+            <button onClick={() => props.delete(index)}>Delete</button>
           </li>
         ))}
       </ul>
