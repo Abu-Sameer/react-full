@@ -1,96 +1,67 @@
 import { useState } from 'react';
 import Sents from './Sents';
 
-function Form() {
-  const [score, setScore] = useState({
-    range: '0',
-    comment: '',
-  });
+export default function Form() {
+  const [range, setRange] = useState(0);
+  const [comment, setComment] = useState('');
   const [messageSent, setMessageSent] = useState(false);
 
-  function handeChange(e) {
-    setScore({ ...score, [e.target.name]: e.target.value });
-  }
-  const handleSubmit = (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
-    setScore({ range: '0', comment: '' });
-    setMessageSent(true);
-  };
+    if (cansave) {
+      setMessageSent(true);
+    }
+  }
+  const cansave = [range, comment].every(Boolean);
   return (
-    <div className="Form">
-      <div
+    <div
+      className={`bg-${
+        messageSent ? 'secondary' : ''
+      } d-flex flex-column justify-content-center align-items-center position-relative`}
+      style={{
+        height: '100vh',
+      }}
+    >
+      <form
+        className="d-flex flex-column justify-content-center align-items-center rounded py-2 px-4"
         style={{
-          background: messageSent ? 'rgb(220, 215, 215)' : '',
-          display: 'flex',
-          justifyContent: 'center',
-          flexDirection: 'column',
-          alignItems: 'center',
-          width: '100vw',
-          height: '100vh',
-          position: 'relative',
+          border: '3px solid blueviolet',
         }}
       >
-        <form
-          onSubmit={handleSubmit}
+        <h3>Customer's Feedback</h3>
+        <h4>Please rate us</h4>
+        <h5>Score: {range}🌟</h5>
+        <input
+          type="range"
+          name="range"
+          min={0}
+          max={10}
+          value={range}
+          onChange={(e) => setRange(e.target.value)}
+        />
+        <textarea
           style={{
-            display: 'flex',
-            justifyContent: 'center',
-            flexDirection: 'column',
-            alignItems: 'center',
-            width: '20rem',
-            margin: '2rem',
-            border: '3px solid gray',
-            padding: '1rem 2rem',
-            borderRadius: '0.3rem',
-            boxShadow: '6px 6px 7px black',
+            border: '2px solid blueviolet',
           }}
+          className="mt-1 p-2 rounded w-100"
+          name="comment"
+          rows="3"
+          autoFocus
+          value={comment}
+          placeholder="Please enter your feedback"
+          onChange={(e) => setComment(e.target.value)}
+        />
+        <button
+          disabled={!cansave}
+          onClick={handleSubmit}
+          className="btn btn-primary mt-2"
         >
-          <h2>Customer Feedback</h2>
-          <h3>Please rate us</h3>
-          <h5>Score: {score.range}🌟</h5>
-          <input
-            type="range"
-            name="range"
-            min={0}
-            max={10}
-            value={score.range}
-            onChange={handeChange}
-          />
-          <textarea
-            style={{
-              width: '100%',
-              marginTop: '1rem',
-              padding: '0.5rem',
-              border: '2px solid gray',
-              borderRadius: '0.3rem',
-            }}
-            name="comment"
-            rows="5"
-            autoFocus
-            value={score.comment}
-            placeholder="Please enter your feedback comment"
-            onChange={handeChange}
-          />
-          <button
-            disabled={!score.comment}
-            style={{
-              padding: '0.5rem',
-              border: '2px solid black',
-              borderRadius: '0.3rem',
-              background: 'green',
-              color: 'white',
-              fontSize: '0.8rem',
-              marginTop: '1rem',
-              cursor: 'pointer',
-            }}
-          >
-            Send Message
-          </button>
-        </form>
-        {messageSent && <Sents back={setMessageSent} />}
-      </div>
+          Send Message
+        </button>
+      </form>
+      {messageSent && (
+        <Sents range={range} comment={comment} back={setMessageSent} />
+      )}
     </div>
   );
 }
-
-export default Form;

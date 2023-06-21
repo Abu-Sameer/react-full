@@ -1,27 +1,16 @@
 import { motion } from 'framer-motion';
 import React from 'react';
 
-export default function Sents(props) {
+export default function Sents({ back, range, comment }) {
   return (
     <div
+      className="d-flex justify-content-center align-items-center position-absolute cursor-pointer"
       style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        textAlign: 'center',
         height: '100vh',
-        width: '100vw',
-        position: 'absolute',
-        cursor: 'pointer',
       }}
     >
       <motion.div
-        style={{
-          background: 'white',
-          border: 'none',
-          borderRadius: '0.5rem',
-          padding: '3rem 4rem',
-        }}
+        className="bg-light rounded py-3 px-5"
         animate={{
           x: 0,
           scale: '100%',
@@ -34,9 +23,11 @@ export default function Sents(props) {
           type: 'spring',
           stiffness: 200,
         }}
-        onClick={() => props.back(false)}
+        onClick={() => back(false)}
       >
-        <h1>Message Sent!</h1>
+        <h1>Message Sent...!</h1>
+        <h5>Rate: {range}🌟</h5>
+        <h5>Feedback: {comment.substring(0, 25)}...!</h5>
       </motion.div>
     </div>
   );
