@@ -1,0 +1,12 @@
+@import '../../common/color.scss';
+
+.header {
+  background-color: $secondary-color;
+}
+
+input {
+  background-color: $primary-color !important;
+  &::placeholder {
+    color: $font-primary !important;
+  }
+}

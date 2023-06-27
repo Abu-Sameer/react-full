@@ -1,0 +1,23 @@
+@import '../../common/color.scss';
+
+.cast-content {
+  font-size: 0.7rem !important;
+  line-height: 1.3rem !important;
+}
+
+.details {
+  font-size: 0.7rem !important;
+  color: $font-secondary;
+}
+.plot {
+  font-size: 0.7rem !important;
+  line-height: 1.1rem !important;
+}
+
+.first {
+  display: inline-block;
+  width: 100px;
+}
+.second {
+  color: $font-secondary;
+}

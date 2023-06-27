@@ -1,0 +1,17 @@
+@import '../../common/color.scss';
+
+.cards {
+  background-color: $secondary-color;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+    transition: all 0.3s;
+  }
+}
+
+.card {
+  background-color: $secondary-color;
+  cursor: pointer;
+}
